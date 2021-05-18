@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+* Licensed to the Apache Software Foundation (ASF) under one
+* or more contributor license agreements. See the NOTICE file
+* distributed with this work for additional information
+* regarding copyright ownership. The ASF licenses this file
+* to you under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance
+* with the License. You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing,
+* software distributed under the License is distributed on an
+* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+* KIND, either express or implied. See the License for the
+* specific language governing permissions and limitations
+* under the License.
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <style type="text/css">
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                margin: 0;
+            }
+            h1 {
+                font-size: 36px;
+                font-weight: bold;
+                margin: 0;
+                color: #fc6;
+            }
+            h2 {
+                margin-top: 0;
+            }
+            #head {
+                background: #0080c0;
+                padding: 10px;
+            }
+            #menu {
+                float: left;
+                border: 1px solid #333;
+                width: 200px;
+                padding: 5px;
+                margin: 10px 10px 20px 5px;
+            }
+
+            #content {
+                margin: 10px 5px 20px 225px;
+                padding: 5px;
+                border: 1px solid #333;
+            }
+
+
+
+        </style>
+</head>
+<body bgcolor="white">
+
+        <div id="head">
+            <h1>Tasks Planner</h1>
+
+        </div>
+
+
+
+
+
+
+       <div id="menu">
+            <div>
+                <h4>Labels</h4>
+                <h:form id="mainForm2">
+
+                <h:commandButton action="#{labelBean.fetchAllLabels}" value="View Labels"/>
+                    <br/>
+                <ui:repeat value="#{labelBean.labelsList}" var="label">
+                    #{label.name} <br/>
+                </ui:repeat>
+                </h:form>
+            </div>
+
+        </div>
+
+
+
+        <div id="content">
+            <h2>Tasks</h2>
+            <h:dataTable
+                    value="#{taskBean.tasksList}" var="o"
+                    styleClass="order-table"
+                    headerClass="order-table-header"
+                    rowClasses="order-table-odd-row,order-table-even-row"
+            >
+
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                    #{o.name}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Priority</f:facet>
+                    #{o.priority.toString()}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Status</f:facet>
+                    #{o.status.toString()}
+                </h:column>
+
+
+            </h:dataTable>
+            <h:form id="mainForm1">
+
+                <h:commandButton action="#{taskBean.fetchAllTasks}" value="View Tasks"/>
+                <br/>
+                <ui:repeat value="#{taskBean.tasksList}" var="task">
+                    #{task.description} <br/>
+                </ui:repeat>
+            </h:form>
+        <div>
+
+            </div>
+        </div>
+
+
+</body>
+</html>
